@@ -62,6 +62,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (!file_exists(getAbsUserPath($data['email']))) {
+            mkdir(getAbsUserPath($data['email']), 0777, true);
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
